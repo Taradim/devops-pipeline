@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  # Application service for production
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      # Use production stage (smaller image, production dependencies only)
+      target: production
+    container_name: devops-pipeline-prod
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env.production
+    restart: unless-stopped
+    # Health check is defined in Dockerfile
+    # Production deployments should use orchestration tools (Kubernetes, ECS, etc.)
+    # This docker-compose is mainly for local production testing
+

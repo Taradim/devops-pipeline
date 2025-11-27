@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  # Neon Local proxy service
+  # This creates ephemeral database branches for development
+  neon-local:
+    image: neondatabase/neon_local:latest
+    container_name: neon-local-dev
+    ports:
+      # Expose PostgreSQL port for local connections (optional, for tools like Drizzle Studio)
+      - '5432:5432'
+    env_file:
+      - .env.development
+    environment:
+      # Use serverless driver to match production Neon behavior
+      - DRIVER=serverless
+    # Restart policy for development convenience
+    restart: unless-stopped
+    # Health check to ensure Neon Local is ready before app starts
+    healthcheck:
+      test: ["CMD", "pg_isready", "-h", "localhost", "-p", "5432"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+
+  # Application service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      # Build for development (includes dev dependencies)
+      target: builder
+    container_name: devops-pipeline-dev
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env.development
+    environment:
+      # Database connection string pointing to neon-local service
+      # Neon Local uses default credentials: neon/npg
+      - DATABASE_URL=postgres://neon:npg@neon-local:5432/neondb
+    volumes:
+      # Mount source code for hot-reload (Node.js --watch)
+      - ./src:/app/src:ro
+      # Mount config files that might change
+      - ./drizzle.config.js:/app/drizzle.config.js:ro
+      # Exclude node_modules to use container's installed dependencies
+      - /app/node_modules
+    # Wait for neon-local to be healthy before starting
+    depends_on:
+      neon-local:
+        condition: service_healthy
+    # Use nodemon or node --watch for development hot-reload
+    # Override the default CMD from Dockerfile
+    command: node --watch src/index.js
+    restart: unless-stopped
+
