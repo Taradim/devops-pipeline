@@ -1,0 +1,6 @@
+{"level":"info","message":"Hello devops","service":"devops-api","timestamp":"2025-11-27T16:52:14.105Z"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [27/Nov/2025:16:52:14 +0000] \"GET / HTTP/1.1\" 200 12 \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0\"","service":"devops-api","timestamp":"2025-11-27T16:52:14.109Z"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [27/Nov/2025:16:52:14 +0000] \"GET /favicon.ico HTTP/1.1\" 404 150 \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0\"","service":"devops-api","timestamp":"2025-11-27T16:52:14.135Z"}
+{"level":"info","message":"Hello devops","service":"devops-api","timestamp":"2025-11-27T17:13:39.268Z"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [27/Nov/2025:17:13:39 +0000] \"GET / HTTP/1.1\" 304 - \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0\"","service":"devops-api","timestamp":"2025-11-27T17:13:39.272Z"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [27/Nov/2025:17:13:39 +0000] \"GET /favicon.ico HTTP/1.1\" 404 150 \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0\"","service":"devops-api","timestamp":"2025-11-27T17:13:39.312Z"}
