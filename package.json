@@ -2,10 +2,13 @@
   "name": "devops-pipeline",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "node --watch src/index.js"
+    "dev": "node --watch src/index.js",
+    "lint": "eslint . ",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "repository": {
     "type": "git",
@@ -14,9 +17,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
   "dependencies": {
     "dotenv": "^17.2.3",
-    "express": "^5.1.0"
+    "eslint": "^9.39.1",
+    "express": "^5.1.0",
+    "prettier": "^3.7.1"
   }
 }
