@@ -37,11 +37,15 @@ app.get('/health', (req, res) => {
   });
 });
 
-app.get('api', (req, res) => {
+app.get('/api', (req, res) => {
   res.status(200).json({ message: 'devops API is running!' });
 });
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', usersRoutes);
+
+app.use((req, res) => {
+  res.status(404).json({ message: 'Route not found' });
+});
 
 export default app;
